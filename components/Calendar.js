@@ -75,6 +75,97 @@
 //added tskschedualr
 
 
+// import React, { useEffect, useState } from 'react';
+// import cheerio from 'cheerio';
+// import moment from 'moment';
+// import { Calendar, momentLocalizer } from 'react-big-calendar';
+// import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+// const localizer = momentLocalizer(moment);
+
+// const CalendarComponent = () => {
+//   const [events, setEvents] = useState([]);
+//   const [selectedDayEvents, setSelectedDayEvents] = useState([]);
+
+//   useEffect(() => {
+//     // Fetch and parse the HTML data
+//     fetch('/your_calendar_data.html')
+//       .then(response => response.text())
+//       .then(data => {
+//         // Parse the HTML data and extract events
+//         const events = parseCalendarData(data);
+//         setEvents(events);
+//       })
+//       .catch(error => console.error('Error fetching calendar data:', error));
+//   }, []);
+
+//   const parseCalendarData = htmlData => {
+//     const $ = cheerio.load(htmlData);
+//     const events = [];
+
+//     // Iterate over each table row and extract event details
+//     $('table tbody tr').each((index, element) => {
+//       const columns = $(element).find('td');
+//       const subject = $(columns[0]).text().trim();
+//       const startTime = moment($(columns[1]).text().trim(), 'MM/DD/YYYY h:mm a').toDate();
+//       const endTime = moment($(columns[2]).text().trim(), 'MM/DD/YYYY h:mm a').toDate();
+//       const location = $(columns[3]).text().trim();
+//       const description = $(columns[4]).text().trim();
+
+//       events.push({
+//         title: subject,
+//         start: startTime,
+//         end: endTime,
+//         location,
+//         description,
+//       });
+//     });
+
+//     return events;
+//   };
+
+//   const handleDayClick = date => {
+//     const selectedDate = moment(date).startOf('day');
+//     const filteredEvents = events.filter(event => {
+//       const eventDate = moment(event.start).startOf('day');
+//       return eventDate.isSame(selectedDate);
+//     });
+//     setSelectedDayEvents(filteredEvents);
+//   };
+
+//   return (
+//     <div style={{ display: 'flex' }}>
+//       <div style={{ flex: 1 }}>
+//         <Calendar
+//           localizer={localizer}
+//           events={events}
+//           startAccessor="start"
+//           endAccessor="end"
+//           style={{ margin: '50px' }}
+//           onSelectEvent={event => console.log(event)}
+//           onSelectSlot={slotInfo => console.log(slotInfo)}
+//           onSelectDay={handleDayClick}
+//         />
+//       </div>
+//       <div style={{ flex: 1, marginLeft: 20 }}>
+//         <h2>Selected Day's Events</h2>
+//         {selectedDayEvents.map((event, index) => (
+//           <div key={index}>
+//             <h3>{event.title}</h3>
+//             <p><strong>Start:</strong> {moment(event.start).format('LLL')}</p>
+//             <p><strong>End:</strong> {moment(event.end).format('LLL')}</p>
+//             <p><strong>Location:</strong> {event.location}</p>
+//             <p><strong>Description:</strong> {event.description}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CalendarComponent;
+
+
 import React, { useEffect, useState } from 'react';
 import cheerio from 'cheerio';
 import moment from 'moment';
@@ -133,6 +224,10 @@ const CalendarComponent = () => {
     setSelectedDayEvents(filteredEvents);
   };
 
+  const handleEventClick = event => {
+    setSelectedDayEvents([event]);
+  };
+
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ flex: 1 }}>
@@ -142,7 +237,7 @@ const CalendarComponent = () => {
           startAccessor="start"
           endAccessor="end"
           style={{ margin: '50px' }}
-          onSelectEvent={event => console.log(event)}
+          onSelectEvent={handleEventClick}
           onSelectSlot={slotInfo => console.log(slotInfo)}
           onSelectDay={handleDayClick}
         />
