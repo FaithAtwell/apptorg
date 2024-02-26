@@ -623,7 +623,7 @@ const CalendarComponent = () => {
       setSelectedEvents([...selectedEvents, event]);
     }
   };
-
+//to adress verticallity issues
   const handleClearEvent = eventId => {
     setSelectedEvents(selectedEvents.filter(event => event.id !== eventId));
   };
