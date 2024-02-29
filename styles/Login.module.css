@@ -17,14 +17,14 @@
     margin-bottom: 10px;
   }
   
-  input {
+  .input {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
-  button {
+  .button {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;

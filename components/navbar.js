@@ -18,8 +18,8 @@ const Navbar = ({ loggedIn, userName }) => {
             </>
           ) : (
             <>
-              <li><Link href="/loginPage">Login</Link></li>
-              <li><Link href="/signup">Sign Up</Link></li>
+              <li><Link href="/loginpage">Login</Link></li>
+              <li><Link href="/signuppage">Sign Up</Link></li>
             </>
           )}
         </ul>

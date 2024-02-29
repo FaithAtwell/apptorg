@@ -1,4 +1,4 @@
-/* styles/Signup.module.css */
+/* ./styles/Signup.module.css */
 
 .container {
     max-width: 400px;
@@ -17,14 +17,15 @@
     margin-bottom: 10px;
   }
   
-  input {
+  /* Prefix the input selector with a class */
+  .input-field {
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 4px;
   }
   
-  button {
+  .button {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;

@@ -47,6 +47,8 @@
 
 // pages/login.js
 
+// components/Login.js
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/Login.module.css';
@@ -90,3 +92,4 @@ const Login = () => {
 };
 
 export default Login;
+

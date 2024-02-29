@@ -1,19 +1,19 @@
+// pages/loginpage.js
 
-// Importing the CalendarComponent from the '../components/Calendar' file.
-import CalendarComponent from '../components/Calendar';
+import Navbar from '../components/navbar';
+import Login from '../components/login';
 
-// Defining a functional component called HomePage.
+const LoginPage = () => {
+  const loggedIn = false; // Replace with your logic to determine if the user is logged in
+  const userName = ''; // Replace with the user's name when logged in
 
-function LoginPage({ Component, pageProps }) {
-    const loggedIn = true; // Replace with your logic to determine if the user is logged in
-    const userName = 'John Doe'; // Replace with the user's name when logged in
-    return (
-      <div>
-        <Navbar loggedIn={loggedIn} userName={userName} />
-        <Component {...pageProps} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Navbar loggedIn={loggedIn} userName={userName} />
+      <Login />
+    </div>
+  );
+};
 
-// Exporting the HomePage component so it can be imported and used in other files.
 export default LoginPage;
+
