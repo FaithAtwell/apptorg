@@ -1,24 +1,15 @@
 
-// Importing the CalendarComponent from the '../components/Calendar' file.
-import Navbar from '@/components/navbar';
-import CalendarComponent from '../components/Calendar';
+import Link from 'next/link';
+import Navbar from '../components/navbar';
+import HomeComponent from '../components/home'; // Updated import statement
 
-// Defining a functional component called HomePage.
+
 const HomePage = () => {
-  // Returning JSX, which represents the structure of the component.
-  // This component renders a div containing an h1 element and the CalendarComponent.
   return (
     <div>
-      <Navbar />
-      <h1>My Calendar</h1>
-      {/* Rendering the CalendarComponent */}
-      <CalendarComponent />
+      <HomeComponent /> {/* Use the renamed component */}
     </div>
   );
 };
 
-// Exporting the HomePage component so it can be imported and used in other files.
 export default HomePage;
-
-
-

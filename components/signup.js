@@ -1,36 +1,82 @@
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import * as Yup from 'yup';
+// import styles from '../styles/Signup.module.css';
+// import axios from 'axios';
+// import { useRouter } from 'next/router';
 
-// import { useState } from 'react';
-// export default function SignupPage() {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const handleSignup = (e) => {
-//         e.preventDefault();
-//         // Implement signup logic here
-//     };
-//     return (
-//         <div>
-//             <h1>Sign Up</h1>
-//             <form onSubmit={handleSignup}>
-//                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//                 <input type="password" placeholder="Re-enter" value={password} onChange={(e) => setPassword(e.target.value)} />
-//                 <input type="name" placeholder="name" value={title} onChange={(e) => setName(e.target.value)} />
-//                 <input type="phone" placeholder="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-//                 <input type="address" placeholder="address" value={address} onChange={(e) => setAddress(e.target.value)} />
-//                 <input type="age" placeholder="age" value={age} onChange={(e) => setAge(e.target.value)} />
-//                 <button type="submit">Sign Up</button>
-//             </form>
-//         </div>
-//     ); 
-// }
+// const Signup = () => {
+//   const router = useRouter();
 
-// pages/signup.js
+//   return (
+//     <div className={styles.container}>
+//       <h1>Sign Up</h1>
+//       <Formik
+//         initialValues={{
+//           email: '',
+//           username: '',
+//           password: '',
+//           confirmPassword: '',
+//           name: '',
+//           phone: ''
+//         }}
+//         validationSchema={Yup.object({
+//           email: Yup.string().email('Invalid email address').required('Email is required'),
+//           username: Yup.string().required('Username is required'),
+//           password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+//           confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm password is required'),
+//           name: Yup.string().required('Name is required'),
+//           phone: Yup.string().required('Phone number is required')
+//         })}
+//         onSubmit={async (values, { setSubmitting }) => {
+//           try {
+//             const response = await axios.post('/api/signup', values);
+//             console.log('Signup successful:', response.data);
+//             router.push('/login'); // Redirect to login page after successful signup
+//           } catch (error) {
+//             console.error('Error signing up:', error);
+//           } finally {
+//             setSubmitting(false);
+//           }
+//         }}
+//       >
+//         {({ isSubmitting }) => (
+//           <Form className={styles.form}>
+//             <div className={styles.field}>
+//               <label htmlFor="email">Email:</label>
+//               <Field type="email" id="email" name="email" placeholder="Email" />
+//               <ErrorMessage name="email" component="div" className={styles.error} />
+//             </div>
+//             <div className={styles.field}>
+//               <label htmlFor="username">Username:</label>
+//               <Field type="text" id="username" name="username" placeholder="Username" />
+//               <ErrorMessage name="username" component="div" className={styles.error} />
+//             </div>
+//             <div className={styles.field}>
+//               <label htmlFor="password">Password:</label>
+//               <Field type="password" id="password" name="password" placeholder="Password" />
+//               <ErrorMessage name="password" component="div" className={styles.error} />
+//             </div>
+//             {/* Add more input fields with labels here */}
+//             <button type="submit" disabled={isSubmitting}>Sign Up</button>
+//           </Form>
+//         )}
+//       </Formik>
+//     </div>
+//   );
+// };
+
+// export default Signup;
+
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/Signup.module.css';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Signup = () => {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <h1>Sign Up</h1>
@@ -41,7 +87,7 @@ const Signup = () => {
           password: '',
           confirmPassword: '',
           name: '',
-          age: ''
+          phone: ''
         }}
         validationSchema={Yup.object({
           email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -49,39 +95,50 @@ const Signup = () => {
           password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
           confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm password is required'),
           name: Yup.string().required('Name is required'),
-          age: Yup.number().required('Age is required').positive('Age must be a positive number').integer('Age must be an integer')
+          phone: Yup.string().required('Phone number is required')
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            const response = await axios.post('/api/signup', values);
+            console.log('Signup successful:', response.data);
+            router.push('/login'); // Redirect to login page after successful signup
+          } catch (error) {
+            console.error('Error signing up:', error);
+          } finally {
             setSubmitting(false);
-          }, 400);
+          }
         }}
       >
         {({ isSubmitting }) => (
           <Form className={styles.form}>
             <div className={styles.field}>
-              <Field type="email" name="email" placeholder="Email" />
+              <label htmlFor="email">Email:</label>
+              <Field type="email" id="email" name="email" placeholder="Email" />
               <ErrorMessage name="email" component="div" className={styles.error} />
             </div>
             <div className={styles.field}>
-              <Field type="text" name="username" placeholder="Username" />
+              <label htmlFor="username">Username:</label>
+              <Field type="text" id="username" name="username" placeholder="Username" />
               <ErrorMessage name="username" component="div" className={styles.error} />
             </div>
             <div className={styles.field}>
-              <Field type="password" name="password" placeholder="Password" />
+              <label htmlFor="password">Password:</label>
+              <Field type="password" id="password" name="password" placeholder="Password" />
               <ErrorMessage name="password" component="div" className={styles.error} />
             </div>
             <div className={styles.field}>
-              <Field type="password" name="confirmPassword" placeholder="Confirm Password" />
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <Field type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" />
               <ErrorMessage name="confirmPassword" component="div" className={styles.error} />
             </div>
             <div className={styles.field}>
-              <Field type="text" name="name" placeholder="Name" />
+              <label htmlFor="name">Name:</label>
+              <Field type="text" id="name" name="name" placeholder="Name" />
               <ErrorMessage name="name" component="div" className={styles.error} />
             </div>
             <div className={styles.field}>
-              <Field type="tel" name="phone" placeholder="Phone" />
+              <label htmlFor="phone">Phone:</label>
+              <Field type="tel" id="phone" name="phone" placeholder="Phone" />
               <ErrorMessage name="phone" component="div" className={styles.error} />
             </div>
             <button type="submit" disabled={isSubmitting}>Sign Up</button>

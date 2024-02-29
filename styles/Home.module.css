@@ -1,0 +1,39 @@
+/* styles/Home.module.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+  
+  .links {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .link {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  .link:hover {
+    color: #0056b3;
+  }
+  
+  .separator {
+    margin: 0 10px;
+  }
+  
