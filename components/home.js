@@ -1,15 +1,26 @@
-// components/home.js
-
+import Link from 'next/link'; // Import the Link component
 import Navbar from '../components/navbar';
 
-// Rename the component to avoid conflicts
 const HomeComponent = () => {
   return (
     <div>
-      {/* Your component content here */}
+      <Navbar />
+      <div>
+        <h1>Welcome to Our Website</h1>
+        <p>Explore our amazing features and services.</p>
+      </div>
+      <div>
+        <h2>Get Started</h2>
+        <p>If you're new here, create an account or log in to get started.</p>
+        <div>
+        <li><Link href="/login">Login</Link></li>
+        <li><Link href="/signup">sign up</Link></li>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default HomeComponent;
+
 
