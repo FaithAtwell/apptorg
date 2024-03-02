@@ -18,7 +18,7 @@ const LoggedInNavbar = ({ userName, handleLogout }) => (
     <nav className={styles.nav}>
       <Link href="/" className={styles.logo}>APPTorg</Link>
       <ul className={styles.navLinks}>
-        <li><Link href="/calendar">Calendar</Link></li>
+        <li><Link href="/CalendarPage">Calendar</Link></li>
         <li><span>Welcome, {userName}</span></li>
       </ul>
     </nav>

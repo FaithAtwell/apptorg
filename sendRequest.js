@@ -9,13 +9,11 @@ const options = {
   }
 };
 // Ensure that both username and password are provided
-const username = 'test1';
-const email = 'test1@test.com';
-const password = 'testtest';
+const username = 'test';
+const password = 'test';
 const data = JSON.stringify({
-  username: 'test1',
-  email: 'test1@test.com',
-  password: 'testtest'
+  username: 'test',
+  password: 'test'
 });
 const req = http.request(options, (res) => {
   console.log(`statusCode: ${res.statusCode}`);

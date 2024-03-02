@@ -1,12 +1,10 @@
-// pages/loginpage.js
-
-import Navbar from '../components/navbar';
-import Login from '../components/login';
+import Navbar from '../components/navbar.js';
+import Login from '../components/login.js';
 
 const LoginPage = () => {
-  const loggedIn = ''; // Replace with your logic to determine if the user is logged in
-  const userName = ''; // Replace with the user's name when logged in
-
+  const loggedIn = true; 
+  const userName = "John Doe"; 
+  
   return (
     <div>
       <Navbar loggedIn={loggedIn} userName={userName} />

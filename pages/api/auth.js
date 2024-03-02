@@ -1,15 +1,14 @@
 import bcrypt from 'bcrypt';
 import connection from './db';
-
-export const signup = (username, email, password) => {
+export const signup = (username, password) => {
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, (err, hash) => {
             if (err) {
                 reject(err);
                 return; // Add return statement to exit the function
             }
-            const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-            connection.query(sql, [username, email, hash], (err, results) => {
+            const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
+            connection.query(sql, [username, hash], (err, results) => {
                 if (err) {
                     reject(err);
                     return; // Add return statement to exit the function
@@ -24,7 +23,6 @@ export const signup = (username, email, password) => {
         });
     });
 };
-
 export const login = (username, password) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM users WHERE username = ?';
