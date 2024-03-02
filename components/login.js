@@ -1,89 +1,58 @@
-
-// import { useState } from 'react';
-// export default function SignupPage() {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const handleSignup = (e) => {
-//         e.preventDefault();
-//         // Implement signup logic here
-//     };
-//     return (
-//         <div>
-//             <h1>Login</h1>
-//             <form onSubmit={handleSignup}>
-//                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//                 <button type="submit">Sign Up</button>
-//             </form>
-//         </div>
-//     );
-// }
-
-// import { useState } from 'react';
-// import Link from 'next/link';
-// export default function LoginPage() {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const handleLogin = (e) => {
-//         e.preventDefault();
-//         // Implement login logic here
-//     };
-//     return (
-//         <div>
-//             <h1>Login</h1>
-//             <form onSubmit={handleLogin}>
-//                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//                 <button type="submit">Login</button>
-//             </form>
-//             <p>Don't have an account?
-//                 <Link href="/signup">
-//                     <a>Sign up</a>
-//                 </Link>
-//             </p>
-//         </div>
-//     );
-// }
-
-// pages/login.js
-
-// components/Login.js
-
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/Login.module.css';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   return (
     <div className={styles.container}>
       <h1>Login</h1>
       <Formik
         initialValues={{
-          email: '',
+          usernameOrEmail: '',
           password: ''
         }}
         validationSchema={Yup.object({
-          email: Yup.string().email('Invalid email address').required('Email is required'),
+          usernameOrEmail: Yup.string().required('Username or Email is required'),
           password: Yup.string().required('Password is required')
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit={async (values, { setSubmitting }) => {
+          setLoading(true);
+          try {
+            const response = await axios.post('/api/login', values);
+            console.log('Login successful:', response.data);
+            router.push('/calendar'); // Redirect to CalendarPage.js after successful login
+          } catch (error) {
+            console.error('Error logging in:', error);
+            setError('Invalid username/email or password');
+          } finally {
+            setLoading(false);
             setSubmitting(false);
-          }, 400);
+          }
         }}
       >
         {({ isSubmitting }) => (
           <Form className={styles.form}>
             <div className={styles.field}>
-              <Field type="email" name="email" placeholder="Email" />
-              <ErrorMessage name="email" component="div" className={styles.error} />
+              <label htmlFor="usernameOrEmail">Username or Email:</label>
+              <Field type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" />
+              <ErrorMessage name="usernameOrEmail" component="div" className={styles.error} />
             </div>
             <div className={styles.field}>
-              <Field type="password" name="password" placeholder="Password" />
+              <label htmlFor="password">Password:</label>
+              <Field type="password" id="password" name="password" placeholder="Password" />
               <ErrorMessage name="password" component="div" className={styles.error} />
             </div>
-            <button type="submit" disabled={isSubmitting}>Login</button>
+            {error && <div className={styles.error}>{error}</div>}
+            <button type="submit" disabled={isSubmitting || loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
           </Form>
         )}
       </Formik>
@@ -92,4 +61,3 @@ const Login = () => {
 };
 
 export default Login;
-

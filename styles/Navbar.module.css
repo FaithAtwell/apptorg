@@ -1,62 +1,52 @@
-/* styles/Navbar.module.css */
+/* Navbar.module.css */
 
-.navbar {
-    background-color: #333;
-    color: white;
-    padding: 30px 20px;
-  }
-  
-  .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar ul li {
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  .navbar ul li a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .navbar ul li a:hover {
-    color: #c550ff; /* Change color on hover */
-  }
+.header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .field {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .label {
-    width: 100px; /* Adjust as needed */
-    margin-right: 10px; /* Add spacing between label and input */
-  }
-  
-  .input-field {
-    flex: 1;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-  
-  
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navLinks li {
+  margin-right: 10px;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: white;
+}
+
+.navLinks li span {
+  color: white;
+}
+
+.logoutButton {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #cc4b3d;
+}

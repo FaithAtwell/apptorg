@@ -1,5 +1,4 @@
 import Navbar from '@/components/navbar';
-import CalendarComponent from '../components/Calendar';
 import Signup from '@/components/signup';
 
 // Defining a functional component called HomePage.

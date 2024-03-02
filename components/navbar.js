@@ -1,31 +1,41 @@
-// components/Navbar.js
-
 import Link from 'next/link';
 import styles from '../styles/Navbar.module.css';
 
-const Navbar = ({ loggedIn, userName }) => {
-  return (
-    <nav className={styles.navbar}>
-      <div className="nav-wrapper">
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><Link href="/">APPTorg</Link></li>
-          {loggedIn ? (
-            <>
-              <li><Link href="/Cal">Calendar</Link></li>
-              <h1>Welcome,</h1> 
-              <li> {userName}</li>
-              <li><Link href="/settings">Settings</Link></li>
-            </>
-          ) : (
-            <>
-              <li><Link href="/loginpage">Login</Link></li>
-              <li><Link href="/signuppage">Sign Up</Link></li>
-            </>
-          )}
-        </ul>
-      </div>
+const LoggedOutNavbar = () => (
+  <header className={styles.header}>
+    <nav className={styles.nav}>
+      <Link href="/" className={styles.logo}>APPTorg</Link>
+      <ul className={styles.navLinks}>
+        <li><Link href="/loginpage">Login</Link></li>
+        <li><Link href="/signuppage">Sign Up</Link></li>
+      </ul>
     </nav>
+  </header>
+);
+
+const LoggedInNavbar = ({ userName, handleLogout }) => (
+  <header className={styles.header}>
+    <nav className={styles.nav}>
+      <Link href="/" className={styles.logo}>APPTorg</Link>
+      <ul className={styles.navLinks}>
+        <li><Link href="/calendar">Calendar</Link></li>
+        <li><span>Welcome, {userName}</span></li>
+      </ul>
+    </nav>
+  </header>
+);
+
+const Navbar = ({ loggedIn, userName, handleLogout }) => {
+  return (
+    <>
+      {loggedIn ? (
+        <LoggedInNavbar userName={userName} handleLogout={handleLogout} />
+      ) : (
+        <LoggedOutNavbar />
+      )}
+    </>
   );
 };
 
 export default Navbar;
+
